@@ -4,4 +4,10 @@
 *.jar
 *.war
 *.ear
-/bin
+*/bin
+
+*/RemoteSystemsTempFiles/*
+/RemoteSystemsTempFiles/
+/.metadata/
+*/.DS_Store
+/.DS_Store

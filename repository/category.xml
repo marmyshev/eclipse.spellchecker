@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/edt_1.0.0.qualifier.jar" id="edt" version="1.0.0.qualifier"> <category name="edt.spelling.category.public"/> </feature>
+
+   
+   <category-def name="edt.spelling.category.public" label="1C: Enterprise Development Tools Plugin"/>
+</site>

@@ -14,14 +14,14 @@
  *     Thomas Reinhardt <thomas@reinhardt.com> - [build path] user library dialog should allow to select JAR from workspace - http://bugs.eclipse.org/300542
  *     Stephan Herrmann <stephan@cs.tu-berlin.de> - [compiler][null] inheritance of null annotations as an option - https://bugs.eclipse.org/388281
  *******************************************************************************/
-package eclipse.spellchecker.preferences;
+package edt.spellchecker.preferences;
 
 import org.eclipse.osgi.util.NLS;
 
 
 public final class PreferencesMessages extends NLS {
 
-	private static final String BUNDLE_NAME= "eclipse.spellchecker.preferences.PreferencesMessages";//$NON-NLS-1$
+    private static final String BUNDLE_NAME = "edt.spellchecker.preferences.PreferencesMessages";//$NON-NLS-1$
 
 	private PreferencesMessages() {
 		// Do not instantiate

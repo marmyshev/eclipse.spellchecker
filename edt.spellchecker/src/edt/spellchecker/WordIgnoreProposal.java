@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.IContextInformation;
@@ -19,13 +19,13 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.texteditor.spelling.SpellingProblem;
 
-import eclipse.spellchecker.engine.ISpellCheckEngine;
-import eclipse.spellchecker.engine.ISpellChecker;
-import eclipse.spellchecker.etc.IJavaCompletionProposal;
-import eclipse.spellchecker.etc.IProposalRelevance;
-import eclipse.spellchecker.etc.JavaPluginImages;
-import eclipse.spellchecker.messages.JavaUIMessages;
-import eclipse.spellchecker.messages.Messages;
+import edt.spellchecker.engine.ISpellCheckEngine;
+import edt.spellchecker.engine.ISpellChecker;
+import edt.spellchecker.etc.IJavaCompletionProposal;
+import edt.spellchecker.etc.IProposalRelevance;
+import edt.spellchecker.etc.JavaPluginImages;
+import edt.spellchecker.messages.JavaUIMessages;
+import edt.spellchecker.messages.Messages;
 
 /**
  * Proposal to ignore the word during the current editing session.

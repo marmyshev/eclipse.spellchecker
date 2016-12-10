@@ -9,16 +9,14 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
-
 import org.eclipse.ui.texteditor.spelling.ISpellingProblemCollector;
 
-import eclipse.spellchecker.engine.ISpellChecker;
+import edt.spellchecker.engine.ISpellChecker;
 
 /**
  * Text spelling engine
@@ -28,16 +26,20 @@ import eclipse.spellchecker.engine.ISpellChecker;
 public class TextSpellingEngine extends SpellingEngine {
 
 	/*
-	 * @see eclipse.spellchecker.SpellingEngine#check(org.eclipse.jface.text.IDocument, org.eclipse.jface.text.IRegion[], eclipse.spellchecker.engine.ISpellChecker, org.eclipse.ui.texteditor.spelling.ISpellingProblemCollector, org.eclipse.core.runtime.IProgressMonitor)
-	 */
+     * @see edt.spellchecker.SpellingEngine#check(org.eclipse.jface.text.IDocument, org.eclipse.jface.text.IRegion[], edt.spellchecker.engine.ISpellChecker, org.eclipse.ui.texteditor.spelling.ISpellingProblemCollector, org.eclipse.core.runtime.IProgressMonitor)
+     */
 	@Override
 	protected void check(IDocument document, IRegion[] regions, ISpellChecker checker, ISpellingProblemCollector collector, IProgressMonitor monitor) {
 		SpellEventListener listener= new SpellEventListener(collector, document);
 		for (int i= 0; i < regions.length; i++) {
 			if (monitor != null && monitor.isCanceled())
-				return;
+            {
+                return;
+            }
 			if (listener.isProblemsThresholdReached())
-				return;
+            {
+                return;
+            }
 			checker.execute(listener, new SpellCheckIterator(document, regions[i], checker.getLocale()));
 		}
 	}

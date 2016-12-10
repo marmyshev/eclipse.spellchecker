@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker.etc;
+package edt.spellchecker.etc;
 
 import java.io.File;
 

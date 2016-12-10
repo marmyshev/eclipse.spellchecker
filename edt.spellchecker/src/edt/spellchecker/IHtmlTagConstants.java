@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 /**
  * Html tag constants.

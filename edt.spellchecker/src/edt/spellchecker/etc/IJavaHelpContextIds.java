@@ -10,9 +10,9 @@
  *     Sebastian Davids <sdavids@gmx.de> bug 38692
  *     Mateusz Matela <mateusz.matela@gmail.com> - [code manipulation] [dcr] toString() builder wizard - https://bugs.eclipse.org/bugs/show_bug.cgi?id=26070
  *******************************************************************************/
-package eclipse.spellchecker.etc;
+package edt.spellchecker.etc;
 
-import eclipse.spellchecker.Activator;
+import edt.spellchecker.Activator;
 
 
 /**

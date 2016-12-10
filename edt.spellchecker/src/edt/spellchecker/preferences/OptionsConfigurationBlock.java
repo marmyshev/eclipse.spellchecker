@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker.preferences;
+package edt.spellchecker.preferences;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,10 +79,10 @@ import org.eclipse.ui.preferences.WorkingCopyManager;
 import org.eclipse.ui.progress.WorkbenchJob;
 import org.osgi.service.prefs.BackingStoreException;
 
-import eclipse.spellchecker.Activator;
-import eclipse.spellchecker.etc.CoreUtility;
-import eclipse.spellchecker.etc.IStatusChangeListener;
-import eclipse.spellchecker.etc.StringMatcher;
+import edt.spellchecker.Activator;
+import edt.spellchecker.etc.CoreUtility;
+import edt.spellchecker.etc.IStatusChangeListener;
+import edt.spellchecker.etc.StringMatcher;
 
 /**
  * Abstract options configuration block providing a general implementation for setting up

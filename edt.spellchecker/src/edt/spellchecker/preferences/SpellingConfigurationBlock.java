@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker.preferences;
+package edt.spellchecker.preferences;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,13 +49,13 @@ import org.eclipse.ui.ide.dialogs.EncodingFieldEditor;
 import org.eclipse.ui.internal.texteditor.SWTUtil;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 
-import eclipse.spellchecker.SpellCheckEngine;
-import eclipse.spellchecker.etc.IJavaHelpContextIds;
-import eclipse.spellchecker.etc.IStatusChangeListener;
-import eclipse.spellchecker.etc.PreferenceConstants;
-import eclipse.spellchecker.etc.StatusInfo;
-import eclipse.spellchecker.etc.StatusUtil;
-import eclipse.spellchecker.messages.Messages;
+import edt.spellchecker.SpellCheckEngine;
+import edt.spellchecker.etc.IJavaHelpContextIds;
+import edt.spellchecker.etc.IStatusChangeListener;
+import edt.spellchecker.etc.PreferenceConstants;
+import edt.spellchecker.etc.StatusInfo;
+import edt.spellchecker.etc.StatusUtil;
+import edt.spellchecker.messages.Messages;
 
 
 /**

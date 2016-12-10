@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker.etc;
+package edt.spellchecker.etc;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
@@ -30,9 +30,9 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.osgi.framework.Bundle;
 
-import eclipse.spellchecker.Activator;
-import eclipse.spellchecker.messages.JavaUIMessages;
-import eclipse.spellchecker.messages.Messages;
+import edt.spellchecker.Activator;
+import edt.spellchecker.messages.JavaUIMessages;
+import edt.spellchecker.messages.Messages;
 
 
 public class CoreUtility {

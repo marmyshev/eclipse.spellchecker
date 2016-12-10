@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
@@ -22,13 +22,13 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.PreferencesUtil;
 import org.eclipse.ui.texteditor.spelling.SpellingProblem;
 
-import eclipse.spellchecker.engine.ISpellCheckEngine;
-import eclipse.spellchecker.engine.ISpellChecker;
-import eclipse.spellchecker.etc.IJavaCompletionProposal;
-import eclipse.spellchecker.etc.IProposalRelevance;
-import eclipse.spellchecker.etc.JavaPluginImages;
-import eclipse.spellchecker.messages.JavaUIMessages;
-import eclipse.spellchecker.messages.Messages;
+import edt.spellchecker.engine.ISpellCheckEngine;
+import edt.spellchecker.engine.ISpellChecker;
+import edt.spellchecker.etc.IJavaCompletionProposal;
+import edt.spellchecker.etc.IProposalRelevance;
+import edt.spellchecker.etc.JavaPluginImages;
+import edt.spellchecker.messages.JavaUIMessages;
+import edt.spellchecker.messages.Messages;
 
 /**
  * Proposal to add the unknown word to the dictionaries.

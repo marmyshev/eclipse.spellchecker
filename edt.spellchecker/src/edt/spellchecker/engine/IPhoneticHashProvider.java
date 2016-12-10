@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package eclipse.spellchecker.engine;
+package edt.spellchecker.engine;
 
 /**
  * Interface of hashers to compute the phonetic hash for a word.

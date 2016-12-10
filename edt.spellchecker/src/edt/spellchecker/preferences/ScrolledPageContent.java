@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker.preferences;
+package edt.spellchecker.preferences;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.SharedScrolledComposite;
 
-import eclipse.spellchecker.Activator;
+import edt.spellchecker.Activator;
 
 
 public class ScrolledPageContent extends SharedScrolledComposite {

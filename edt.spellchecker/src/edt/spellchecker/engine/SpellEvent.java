@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package eclipse.spellchecker.engine;
+package edt.spellchecker.engine;
 
 import java.util.Set;
 
@@ -66,44 +66,50 @@ public class SpellEvent implements ISpellEvent {
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellEvent#getBegin()
-	 */
-	public final int getBegin() {
+     * @see edt.spellchecker.engine.ISpellEvent#getBegin()
+     */
+	@Override
+    public final int getBegin() {
 		return fBegin;
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellEvent#getEnd()
-	 */
-	public final int getEnd() {
+     * @see edt.spellchecker.engine.ISpellEvent#getEnd()
+     */
+	@Override
+    public final int getEnd() {
 		return fEnd;
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellEvent#getProposals()
-	 */
-	public final Set<RankedWordProposal> getProposals() {
+     * @see edt.spellchecker.engine.ISpellEvent#getProposals()
+     */
+	@Override
+    public final Set<RankedWordProposal> getProposals() {
 		return fChecker.getProposals(fWord, fSentence);
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellEvent#getWord()
-	 */
-	public final String getWord() {
+     * @see edt.spellchecker.engine.ISpellEvent#getWord()
+     */
+	@Override
+    public final String getWord() {
 		return fWord;
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellEvent#isMatch()
-	 */
-	public final boolean isMatch() {
+     * @see edt.spellchecker.engine.ISpellEvent#isMatch()
+     */
+	@Override
+    public final boolean isMatch() {
 		return fMatch;
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellEvent#isStart()
-	 */
-	public final boolean isStart() {
+     * @see edt.spellchecker.engine.ISpellEvent#isStart()
+     */
+	@Override
+    public final boolean isStart() {
 		return fSentence;
 	}
 }

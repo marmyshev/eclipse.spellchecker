@@ -8,14 +8,14 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import java.util.Locale;
 
-import com.ibm.icu.text.BreakIterator;
-
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
+
+import com.ibm.icu.text.BreakIterator;
 
 
 /**
@@ -31,8 +31,8 @@ public class PropertiesFileSpellCheckIterator extends SpellCheckIterator {
 	}
 
 	/*
-	 * @see eclipse.spellchecker.SpellCheckIterator#next()
-	 */
+     * @see edt.spellchecker.SpellCheckIterator#next()
+     */
 	@Override
 	public final String next() {
 		int previous= -1;
@@ -40,19 +40,30 @@ public class PropertiesFileSpellCheckIterator extends SpellCheckIterator {
 		while (fSuccessor != BreakIterator.DONE && (token == null || fContent.charAt(fNext) == '&')) {
 			if (token != null) {
 				if (previous == -1)
-					previous= fPrevious;
+                {
+                    previous= fPrevious;
+                }
 				String nextToken= nextToken();
 				if (nextToken != null)
-					token= token + nextToken.substring(1);
-				else
-					token= token + '&';
-			} else
-				token= nextToken();
+                {
+                    token= token + nextToken.substring(1);
+                }
+                else
+                {
+                    token= token + '&';
+                }
+			}
+            else
+            {
+                token= nextToken();
+            }
 
 		}
 
 		if (previous != -1)
-			fPrevious= previous;
+        {
+            fPrevious= previous;
+        }
 
 		if (token != null && token.length() > 1 && token.startsWith("&")) { //$NON-NLS-1$
 			token= token.substring(1);

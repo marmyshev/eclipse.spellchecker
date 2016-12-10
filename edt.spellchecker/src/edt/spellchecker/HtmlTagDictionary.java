@@ -9,11 +9,11 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import java.net.URL;
 
-import eclipse.spellchecker.engine.AbstractSpellDictionary;
+import edt.spellchecker.engine.AbstractSpellDictionary;
 
 /**
  * Dictionary for html tags.
@@ -23,21 +23,23 @@ import eclipse.spellchecker.engine.AbstractSpellDictionary;
 public class HtmlTagDictionary extends AbstractSpellDictionary {
 
 	/*
-	 * @see eclipse.spellchecker.engine.AbstractSpellDictionary#getName()
-	 */
+     * @see edt.spellchecker.engine.AbstractSpellDictionary#getName()
+     */
 	@Override
 	protected final URL getURL() {
 		return null;
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellDictionary#isCorrect(java.lang.String)
-	 */
+     * @see edt.spellchecker.engine.ISpellDictionary#isCorrect(java.lang.String)
+     */
 	@Override
 	public boolean isCorrect(final String word) {
 
 		if (word.charAt(0) == IHtmlTagConstants.HTML_TAG_PREFIX)
-			return super.isCorrect(word);
+        {
+            return super.isCorrect(word);
+        }
 
 		return false;
 	}
@@ -59,9 +61,9 @@ public class HtmlTagDictionary extends AbstractSpellDictionary {
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.AbstractSpellDictionary#stripNonLetters(java.lang.String)
-	 * @since 3.3
-	 */
+     * @see edt.spellchecker.engine.AbstractSpellDictionary#stripNonLetters(java.lang.String)
+     * @since 3.3
+     */
 	@Override
 	protected String stripNonLetters(String word) {
 		return word;

@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package eclipse.spellchecker.engine;
+package edt.spellchecker.engine;
 
 /**
  * Default phonetic hash provider for english languages.

@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *     Benjamin Muskalla <b.muskalla@gmx.net> - [spell checking][implementation] PersistentSpellDictionary closes wrong stream - https://bugs.eclipse.org/bugs/show_bug.cgi?id=236421
  *******************************************************************************/
-package eclipse.spellchecker.engine;
+package edt.spellchecker.engine;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
-import eclipse.spellchecker.Activator;
+import edt.spellchecker.Activator;
 
 
 /**
@@ -48,12 +48,14 @@ public class PersistentSpellDictionary extends AbstractSpellDictionary {
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellDictionary#addWord(java.lang.String)
-	 */
+     * @see edt.spellchecker.engine.ISpellDictionary#addWord(java.lang.String)
+     */
 	@Override
 	public void addWord(final String word) {
 		if (isCorrect(word))
-			return;
+        {
+            return;
+        }
 
 		FileOutputStream fileStream= null;
 		try {
@@ -62,8 +64,10 @@ public class PersistentSpellDictionary extends AbstractSpellDictionary {
 			int size= byteBuffer.limit();
 			final byte[] byteArray;
 			if (byteBuffer.hasArray())
-				byteArray= byteBuffer.array();
-			else {
+            {
+                byteArray= byteBuffer.array();
+            }
+            else {
 				byteArray= new byte[size];
 				byteBuffer.get(byteArray);
 			}
@@ -72,8 +76,10 @@ public class PersistentSpellDictionary extends AbstractSpellDictionary {
 
 			// Encoding UTF-16 charset writes a BOM. In which case we need to cut it away if the file isn't empty
 			int bomCutSize= 0;
-			if (!isEmpty() && "UTF-16".equals(charset.name())) //$NON-NLS-1$
-				bomCutSize= 2;
+			if (!isEmpty() && "UTF-16".equals(charset.name()))
+            {
+                bomCutSize= 2;
+            }
 
 			fileStream.write(byteArray, bomCutSize, size - bomCutSize);
 		} catch (IOException exception) {
@@ -82,7 +88,9 @@ public class PersistentSpellDictionary extends AbstractSpellDictionary {
 		} finally {
 			try {
 				if (fileStream != null)
-					fileStream.close();
+                {
+                    fileStream.close();
+                }
 			} catch (IOException e) {
 			}
 		}
@@ -91,8 +99,8 @@ public class PersistentSpellDictionary extends AbstractSpellDictionary {
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.AbstractSpellDictionary#getURL()
-	 */
+     * @see edt.spellchecker.engine.AbstractSpellDictionary#getURL()
+     */
 	@Override
 	protected final URL getURL() {
 		return fLocation;

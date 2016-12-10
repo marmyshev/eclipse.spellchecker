@@ -12,13 +12,13 @@
  *     Mateusz Matela <mateusz.matela@gmail.com> - [toString] finish toString() builder wizard - https://bugs.eclipse.org/bugs/show_bug.cgi?id=267710
  *     Mateusz Matela <mateusz.matela@gmail.com> - [toString] toString() generator: Fields in declaration order - https://bugs.eclipse.org/bugs/show_bug.cgi?id=279924
  *******************************************************************************/
-package eclipse.spellchecker.messages;
+package edt.spellchecker.messages;
 
 import org.eclipse.osgi.util.NLS;
 
 public final class JavaUIMessages extends NLS {
 
-	private static final String BUNDLE_NAME= "eclipse.spellchecker.messages.JavaUIMessages";//$NON-NLS-1$
+    private static final String BUNDLE_NAME = "edt.spellchecker.messages.JavaUIMessages";//$NON-NLS-1$
 
 	private JavaUIMessages() {
 		// Do not instantiate
@@ -81,12 +81,14 @@ public final class JavaUIMessages extends NLS {
 	 * DO NOT REMOVE, used in a product.
 	 * @deprecated As of 3.6
 	 */
-	public static String TypeSelectionDialog_lowerLabel;
+	@Deprecated
+    public static String TypeSelectionDialog_lowerLabel;
 	/**
 	 * DO NOT REMOVE, used in a product.
 	 * @deprecated As of 3.6
 	 */
-	public static String TypeSelectionDialog_upperLabel;
+	@Deprecated
+    public static String TypeSelectionDialog_upperLabel;
 
 	public static String ExceptionDialog_seeErrorLogMessage;
 

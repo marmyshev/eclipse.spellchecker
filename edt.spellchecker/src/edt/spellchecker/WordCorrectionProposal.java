@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -18,10 +18,10 @@ import org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 
-import eclipse.spellchecker.etc.IJavaCompletionProposal;
-import eclipse.spellchecker.etc.JavaPluginImages;
-import eclipse.spellchecker.messages.JavaUIMessages;
-import eclipse.spellchecker.messages.Messages;
+import edt.spellchecker.etc.IJavaCompletionProposal;
+import edt.spellchecker.etc.JavaPluginImages;
+import edt.spellchecker.messages.JavaUIMessages;
+import edt.spellchecker.messages.Messages;
 
 /**
  * Proposal to correct the incorrectly spelled word.

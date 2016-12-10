@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package eclipse.spellchecker.engine;
+package edt.spellchecker.engine;
 
 import java.util.Iterator;
 

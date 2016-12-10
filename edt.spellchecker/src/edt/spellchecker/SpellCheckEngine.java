@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,23 +25,23 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.eclipse.core.variables.IStringVariableManager;
-import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.variables.IStringVariableManager;
+import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.ui.texteditor.spelling.SpellingService;
 import org.eclipse.ui.editors.text.EditorsUI;
+import org.eclipse.ui.texteditor.spelling.SpellingService;
 
-import eclipse.spellchecker.engine.DefaultSpellChecker;
-import eclipse.spellchecker.engine.ISpellCheckEngine;
-import eclipse.spellchecker.engine.ISpellChecker;
-import eclipse.spellchecker.engine.ISpellDictionary;
-import eclipse.spellchecker.engine.LocaleSensitiveSpellDictionary;
-import eclipse.spellchecker.engine.PersistentSpellDictionary;
-import eclipse.spellchecker.etc.PreferenceConstants;
+import edt.spellchecker.engine.DefaultSpellChecker;
+import edt.spellchecker.engine.ISpellCheckEngine;
+import edt.spellchecker.engine.ISpellChecker;
+import edt.spellchecker.engine.ISpellDictionary;
+import edt.spellchecker.engine.LocaleSensitiveSpellDictionary;
+import edt.spellchecker.engine.PersistentSpellDictionary;
+import edt.spellchecker.etc.PreferenceConstants;
 
 
 /**
@@ -77,10 +77,14 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 			URL url= FileLocator.toFileURL(location);
 			File file= new File(url.getFile());
 			if (!file.isDirectory())
-				return Collections.emptySet();
+            {
+                return Collections.emptySet();
+            }
 			fileNames= file.list();
 			if (fileNames == null)
-				return Collections.emptySet();
+            {
+                return Collections.emptySet();
+            }
 		} catch (IOException ex) {
 			Activator.log(ex);
 			return Collections.emptySet();
@@ -95,11 +99,17 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 				String localeName= fileName.substring(0, localeEnd);
 				int languageEnd=localeName.indexOf('_');
 				if (languageEnd == -1)
-					localesWithInstalledDictionaries.add(new Locale(localeName));
-				else if (languageEnd == 2 && localeName.length() == 5)
-					localesWithInstalledDictionaries.add(new Locale(localeName.substring(0, 2), localeName.substring(3)));
-				else if (localeName.length() > 6 && localeName.charAt(5) == '_')
-					localesWithInstalledDictionaries.add(new Locale(localeName.substring(0, 2), localeName.substring(3, 5), localeName.substring(6)));
+                {
+                    localesWithInstalledDictionaries.add(new Locale(localeName));
+                }
+                else if (languageEnd == 2 && localeName.length() == 5)
+                {
+                    localesWithInstalledDictionaries.add(new Locale(localeName.substring(0, 2), localeName.substring(3)));
+                }
+                else if (localeName.length() > 6 && localeName.charAt(5) == '_')
+                {
+                    localesWithInstalledDictionaries.add(new Locale(localeName.substring(0, 2), localeName.substring(3, 5), localeName.substring(6)));
+                }
 			}
 		}
 
@@ -115,13 +125,17 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 	 */
 	public static Set<Locale> getLocalesWithInstalledDictionaries() {
 		if (fgLocalesWithInstalledDictionaries != null)
-			return fgLocalesWithInstalledDictionaries;
+        {
+            return fgLocalesWithInstalledDictionaries;
+        }
 
 		Enumeration<URL> locations;
 		try {
 			locations= getDictionaryLocations();
 			if (locations == null)
-				return fgLocalesWithInstalledDictionaries= Collections.emptySet();
+            {
+                return fgLocalesWithInstalledDictionaries= Collections.emptySet();
+            }
 		} catch (IOException ex) {
 			Activator.log(ex);
 			return fgLocalesWithInstalledDictionaries= Collections.emptySet();
@@ -157,7 +171,9 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 	public ISpellDictionary findDictionary(Locale locale) {
 		ISpellDictionary dictionary= fLocaleDictionaries.get(locale);
 		if (dictionary != null)
-			return dictionary;
+        {
+            return dictionary;
+        }
 
 		// Try same language
 		String language= locale.getLanguage();
@@ -166,22 +182,28 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 			Entry<Locale, ISpellDictionary> entry= iter.next();
 			Locale dictLocale= entry.getKey();
 			if (dictLocale.getLanguage().equals(language))
-				return entry.getValue();
+            {
+                return entry.getValue();
+            }
 		}
 
 		return null;
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellCheckEngine#findDictionary(java.util.Locale)
-	 * @since 3.3
-	 */
+     * @see edt.spellchecker.engine.ISpellCheckEngine#findDictionary(java.util.Locale)
+     * @since 3.3
+     */
 	public static Locale findClosestLocale(Locale locale) {
 		if (locale == null || locale.toString().length() == 0)
-			return locale;
+        {
+            return locale;
+        }
 
 		if (getLocalesWithInstalledDictionaries().contains(locale))
-			return locale;
+        {
+            return locale;
+        }
 
 		// Try same language
 		String language= locale.getLanguage();
@@ -189,13 +211,17 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 		while (iter.hasNext()) {
 			Locale dictLocale= iter.next();
 			if (dictLocale.getLanguage().equals(language))
-				return dictLocale;
+            {
+                return dictLocale;
+            }
 		}
 
 		// Try whether American English is present
 		Locale defaultLocale= Locale.US;
 		if (getLocalesWithInstalledDictionaries().contains(defaultLocale))
-			return defaultLocale;
+        {
+            return defaultLocale;
+        }
 
 		return null;
 	}
@@ -214,7 +240,9 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 	public static Enumeration<URL> getDictionaryLocations() throws IOException {
 		final Activator plugin= Activator.getDefault();
 		if (plugin != null)
-			return plugin.getBundle().getResources("/" + DICTIONARY_LOCATION); //$NON-NLS-1$
+         {
+            return plugin.getBundle().getResources("/" + DICTIONARY_LOCATION); //$NON-NLS-1$
+        }
 		return null;
 	}
 
@@ -226,7 +254,9 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 	public static synchronized final ISpellCheckEngine getInstance() {
 
 		if (fgEngine == null)
-			fgEngine= new SpellCheckEngine();
+        {
+            fgEngine= new SpellCheckEngine();
+        }
 
 		return fgEngine;
 	}
@@ -286,19 +316,26 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellCheckEngine#getSpellChecker()
-	 */
-	public synchronized final ISpellChecker getSpellChecker() throws IllegalStateException {
+     * @see edt.spellchecker.engine.ISpellCheckEngine#getSpellChecker()
+     */
+	@Override
+    public synchronized final ISpellChecker getSpellChecker() throws IllegalStateException {
 		if (fGlobalDictionaries == null)
-			throw new IllegalStateException("spell checker has been shut down"); //$NON-NLS-1$
+         {
+            throw new IllegalStateException("spell checker has been shut down"); //$NON-NLS-1$
+        }
 
 		IPreferenceStore store= Activator.getDefault().getPreferenceStore();
 		Locale locale= getCurrentLocale(store);
-		if (fUserDictionary == null && "".equals(locale.toString())) //$NON-NLS-1$
-			return null;
+		if (fUserDictionary == null && "".equals(locale.toString()))
+        {
+            return null;
+        }
 
 		if (fChecker != null && fChecker.getLocale().equals(locale))
-			return fChecker;
+        {
+            return fChecker;
+        }
 
 		resetSpellChecker();
 
@@ -312,7 +349,9 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 
 		ISpellDictionary dictionary= findDictionary(fChecker.getLocale());
 		if (dictionary != null)
-			fChecker.addDictionary(dictionary);
+        {
+            fChecker.addDictionary(dictionary);
+        }
 
 		return fChecker;
 	}
@@ -330,17 +369,25 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 	public static Locale convertToLocale(String locale) {
 		Locale defaultLocale= SpellCheckEngine.getDefaultLocale();
 		if (locale.equals(defaultLocale.toString()))
-			return defaultLocale;
+        {
+            return defaultLocale;
+        }
 
 		int length= locale.length();
 		if (length >= 5)
-			return new Locale(locale.substring(0, 2), locale.substring(3, 5));
+        {
+            return new Locale(locale.substring(0, 2), locale.substring(3, 5));
+        }
 
 		if (length == 2 && locale.indexOf('_') == -1)
-			return new Locale(locale);
+        {
+            return new Locale(locale);
+        }
 
 		if (length == 3 && locale.charAt(0) == '_')
-			return new Locale("", locale.substring(1)); //$NON-NLS-1$
+         {
+            return new Locale("", locale.substring(1)); //$NON-NLS-1$
+        }
 
 		return new Locale(""); //$NON-NLS-1$
 	}
@@ -348,9 +395,12 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 	/*
 	 * @see org.eclipse.jdt.ui.text.spelling.engine.ISpellCheckEngine#getLocale()
 	 */
-	public synchronized final Locale getLocale() {
+	@Override
+    public synchronized final Locale getLocale() {
 		if (fChecker == null)
-			return null;
+        {
+            return null;
+        }
 
 		return fChecker.getLocale();
 	}
@@ -358,7 +408,8 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 	/*
 	 * @see org.eclipse.jface.util.IPropertyChangeListener#propertyChange(org.eclipse.jface.util.PropertyChangeEvent)
 	 */
-	public final void propertyChange(final PropertyChangeEvent event) {
+	@Override
+    public final void propertyChange(final PropertyChangeEvent event) {
 		if (event.getProperty().equals(PreferenceConstants.SPELLING_LOCALE)) {
 			resetSpellChecker();
 			return;
@@ -376,9 +427,13 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 
 		if (event.getProperty().equals(SpellingService.PREFERENCE_SPELLING_ENABLED) && !EditorsUI.getPreferenceStore().getBoolean(SpellingService.PREFERENCE_SPELLING_ENABLED)) {
 			if (this == fgEngine)
-				SpellCheckEngine.shutdownInstance();
-			else
-				shutdown();
+            {
+                SpellCheckEngine.shutdownInstance();
+            }
+            else
+            {
+                shutdown();
+            }
 		}
 	}
 
@@ -387,7 +442,9 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 	 */
 	private synchronized void resetUserDictionary() {
 		if (fChecker == null)
-			return;
+        {
+            return;
+        }
 
 		// Update user dictionary
 		if (fUserDictionary != null) {
@@ -401,7 +458,9 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 
 		VariablesPlugin variablesPlugin= VariablesPlugin.getDefault();
 		if (variablesPlugin == null)
-			return;
+        {
+            return;
+        }
 
 		IStringVariableManager variableManager= variablesPlugin.getStringVariableManager();
 		try {
@@ -414,7 +473,9 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 			try {
 				File file= new File(filePath);
 				if (!file.exists() && !file.createNewFile())
-					return;
+                {
+                    return;
+                }
 
 				final URL url= new URL("file", null, filePath); //$NON-NLS-1$
 				InputStream stream= url.openStream();
@@ -435,25 +496,28 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellCheckEngine#registerDictionary(eclipse.spellchecker.engine.ISpellDictionary)
-	 */
-	public synchronized final void registerGlobalDictionary(final ISpellDictionary dictionary) {
+     * @see edt.spellchecker.engine.ISpellCheckEngine#registerDictionary(edt.spellchecker.engine.ISpellDictionary)
+     */
+	@Override
+    public synchronized final void registerGlobalDictionary(final ISpellDictionary dictionary) {
 		fGlobalDictionaries.add(dictionary);
 		resetSpellChecker();
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellCheckEngine#registerDictionary(java.util.Locale, eclipse.spellchecker.engine.ISpellDictionary)
-	 */
-	public synchronized final void registerDictionary(final Locale locale, final ISpellDictionary dictionary) {
+     * @see edt.spellchecker.engine.ISpellCheckEngine#registerDictionary(java.util.Locale, edt.spellchecker.engine.ISpellDictionary)
+     */
+	@Override
+    public synchronized final void registerDictionary(final Locale locale, final ISpellDictionary dictionary) {
 		fLocaleDictionaries.put(locale, dictionary);
 		resetSpellChecker();
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellCheckEngine#unload()
-	 */
-	public synchronized final void shutdown() {
+     * @see edt.spellchecker.engine.ISpellCheckEngine#unload()
+     */
+	@Override
+    public synchronized final void shutdown() {
 
 		Activator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
 		EditorsUI.getPreferenceStore().removePropertyChangeListener(this);
@@ -479,7 +543,9 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 		if (fChecker != null) {
 			ISpellDictionary dictionary= fLocaleDictionaries.get(fChecker.getLocale());
 			if (dictionary != null)
-				dictionary.unload();
+            {
+                dictionary.unload();
+            }
 		}
 		fChecker= null;
 	}
@@ -487,7 +553,8 @@ public class SpellCheckEngine implements ISpellCheckEngine, IPropertyChangeListe
 	/*
 	 * @see org.eclipse.jdt.ui.text.spelling.engine.ISpellCheckEngine#unregisterDictionary(org.eclipse.jdt.ui.text.spelling.engine.ISpellDictionary)
 	 */
-	public synchronized final void unregisterDictionary(final ISpellDictionary dictionary) {
+	@Override
+    public synchronized final void unregisterDictionary(final ISpellDictionary dictionary) {
 		fGlobalDictionaries.remove(dictionary);
 		fLocaleDictionaries.values().remove(dictionary);
 		dictionary.unload();

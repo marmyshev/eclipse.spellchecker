@@ -1,4 +1,4 @@
-package eclipse.spellchecker.etc;
+package edt.spellchecker.etc;
 
 import java.util.Vector;
 

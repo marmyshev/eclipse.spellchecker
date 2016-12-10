@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.text.IDocument;
@@ -17,11 +17,11 @@ import org.eclipse.ui.texteditor.spelling.ISpellingEngine;
 import org.eclipse.ui.texteditor.spelling.ISpellingProblemCollector;
 import org.eclipse.ui.texteditor.spelling.SpellingContext;
 
-import eclipse.spellchecker.engine.ISpellCheckEngine;
-import eclipse.spellchecker.engine.ISpellChecker;
-import eclipse.spellchecker.engine.ISpellEvent;
-import eclipse.spellchecker.engine.ISpellEventListener;
-import eclipse.spellchecker.etc.PreferenceConstants;
+import edt.spellchecker.engine.ISpellCheckEngine;
+import edt.spellchecker.engine.ISpellChecker;
+import edt.spellchecker.engine.ISpellEvent;
+import edt.spellchecker.engine.ISpellEventListener;
+import edt.spellchecker.etc.PreferenceConstants;
 
 
 /**
@@ -62,11 +62,14 @@ public abstract class SpellingEngine implements ISpellingEngine {
 		}
 
 		/*
-		 * @see eclipse.spellchecker.engine.ISpellEventListener#handle(eclipse.spellchecker.engine.ISpellEvent)
-		 */
-		public void handle(ISpellEvent event) {
+         * @see edt.spellchecker.engine.ISpellEventListener#handle(edt.spellchecker.engine.ISpellEvent)
+         */
+		@Override
+        public void handle(ISpellEvent event) {
 			if (isProblemsThresholdReached())
-				return;
+            {
+                return;
+            }
 			fProblemCount++;
 			fCollector.accept(new JavaSpellingProblem(event, fDocument));
 		}
@@ -79,12 +82,15 @@ public abstract class SpellingEngine implements ISpellingEngine {
 	/*
 	 * @see org.eclipse.ui.texteditor.spelling.ISpellingEngine#check(org.eclipse.jface.text.IDocument, org.eclipse.jface.text.IRegion[], org.eclipse.ui.texteditor.spelling.SpellingContext, org.eclipse.ui.texteditor.spelling.ISpellingProblemCollector, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void check(IDocument document, IRegion[] regions, SpellingContext context, ISpellingProblemCollector collector, IProgressMonitor monitor) {
+	@Override
+    public void check(IDocument document, IRegion[] regions, SpellingContext context, ISpellingProblemCollector collector, IProgressMonitor monitor) {
 		if (collector != null) {
 			final ISpellCheckEngine spellingEngine= SpellCheckEngine.getInstance();
 			ISpellChecker checker= spellingEngine.getSpellChecker();
 			if (checker != null)
-				check(document, regions, checker, collector, monitor);
+            {
+                check(document, regions, checker, collector, monitor);
+            }
 		}
 	}
 

@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker.engine;
+package edt.spellchecker.engine;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -51,17 +51,17 @@ public class LocaleSensitiveSpellDictionary extends AbstractSpellDictionary {
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.AbstractSpellDictionary#getURL()
-	 */
+     * @see edt.spellchecker.engine.AbstractSpellDictionary#getURL()
+     */
 	@Override
 	protected final URL getURL() throws MalformedURLException {
 		return new URL(fLocation, fLocale.toString() + ".dictionary");  //$NON-NLS-1$
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.AbstractSpellDictionary#getInitialSize()
-	 * @since 3.6
-	 */
+     * @see edt.spellchecker.engine.AbstractSpellDictionary#getInitialSize()
+     * @since 3.6
+     */
 	@Override
 	protected int getInitialSize() {
 		return 32 * 1024;

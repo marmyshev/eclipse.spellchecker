@@ -1,3 +1,4 @@
+package edt.spellchecker;
 ///*******************************************************************************
 // * Copyright (c) 2000, 2011 IBM Corporation and others.
 // * All rights reserved. This program and the accompanying materials
@@ -9,7 +10,7 @@
 // *     IBM Corporation - initial API and implementation
 // *******************************************************************************/
 //
-//package eclipse.spellchecker;
+//package edt.spellchecker;
 //
 //import java.util.ArrayList;
 //import java.util.Collections;
@@ -32,9 +33,9 @@
 //import org.eclipse.jdt.internal.ui.JavaPlugin;
 //import org.eclipse.jdt.internal.ui.JavaPluginImages;
 //import org.eclipse.jdt.internal.ui.text.java.JavaCompletionProposal;
-//import eclipse.spellchecker.engine.ISpellCheckEngine;
-//import eclipse.spellchecker.engine.ISpellChecker;
-//import eclipse.spellchecker.engine.RankedWordProposal;
+//import edt.spellchecker.engine.ISpellCheckEngine;
+//import edt.spellchecker.engine.ISpellChecker;
+//import edt.spellchecker.engine.RankedWordProposal;
 //
 ///**
 // * Content assist processor to complete words.

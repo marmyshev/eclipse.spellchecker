@@ -9,14 +9,14 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import java.net.URL;
 
 import org.eclipse.core.runtime.Preferences.IPropertyChangeListener;
 import org.eclipse.core.runtime.Preferences.PropertyChangeEvent;
 
-import eclipse.spellchecker.engine.AbstractSpellDictionary;
+import edt.spellchecker.engine.AbstractSpellDictionary;
 
 /**
  * Dictionary for task tags.
@@ -26,8 +26,8 @@ import eclipse.spellchecker.engine.AbstractSpellDictionary;
 public class TaskTagDictionary extends AbstractSpellDictionary implements IPropertyChangeListener {
 
 	/*
-	 * @see eclipse.spellchecker.engine.AbstractSpellDictionary#getName()
-	 */
+     * @see edt.spellchecker.engine.AbstractSpellDictionary#getName()
+     */
 	@Override
 	protected final URL getURL() {
 		return null;
@@ -45,7 +45,8 @@ public class TaskTagDictionary extends AbstractSpellDictionary implements IPrope
 	/*
 	 * @see org.eclipse.core.runtime.Preferences.IPropertyChangeListener#propertyChange(org.eclipse.core.runtime.Preferences.PropertyChangeEvent)
 	 */
-	public void propertyChange(final PropertyChangeEvent event) {
+	@Override
+    public void propertyChange(final PropertyChangeEvent event) {
 
 //		if (JavaCore.COMPILER_TASK_TAGS.equals(event.getProperty()))
 //			updateTaskTags();
@@ -82,9 +83,9 @@ public class TaskTagDictionary extends AbstractSpellDictionary implements IPrope
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.AbstractSpellDictionary#stripNonLetters(java.lang.String)
-	 * @since 3.3
-	 */
+     * @see edt.spellchecker.engine.AbstractSpellDictionary#stripNonLetters(java.lang.String)
+     * @since 3.3
+     */
 	@Override
 	protected String stripNonLetters(String word) {
 		return word;

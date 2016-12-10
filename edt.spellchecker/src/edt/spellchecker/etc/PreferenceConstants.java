@@ -9,14 +9,14 @@
  *     IBM Corporation - initial API and implementation
  *     Guven Demir <guven.internet+eclipse@gmail.com> - [package explorer] Alternative package name shortening: abbreviation - https://bugs.eclipse.org/bugs/show_bug.cgi?id=299514
  *******************************************************************************/
-package eclipse.spellchecker.etc;
+package edt.spellchecker.etc;
 
 import java.util.Locale;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import eclipse.spellchecker.Activator;
-import eclipse.spellchecker.SpellCheckEngine;
+import edt.spellchecker.Activator;
+import edt.spellchecker.SpellCheckEngine;
 
 
 

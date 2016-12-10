@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *     Billy Huang <billyhuang31@gmail.com> - [quick assist] concatenate/merge string literals - https://bugs.eclipse.org/77632
  *******************************************************************************/
-package eclipse.spellchecker.etc;
+package edt.spellchecker.etc;
 
 /**
  * Interface defining relevance values for quick fixes/assists.

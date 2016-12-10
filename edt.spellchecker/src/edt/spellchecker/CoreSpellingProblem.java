@@ -8,13 +8,13 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 
-import eclipse.spellchecker.etc.CategorizedProblem;
+import edt.spellchecker.etc.CategorizedProblem;
 
 
 /**
@@ -26,7 +26,7 @@ public class CoreSpellingProblem extends CategorizedProblem {
 
 	// spelling 'marker type' name. Only virtual as spelling problems are never persisted in markers.
 	// marker type is used in the quickFixProcessor extension point
-	public static final String MARKER_TYPE= "eclipse.spellchecker.spellchecker.marker"; //$NON-NLS-1$
+    public static final String MARKER_TYPE = "edt.spellchecker.spellchecker.marker"; //$NON-NLS-1$
 
 	/** The end offset of the problem */
 	private int fSourceEnd= 0;
@@ -83,7 +83,8 @@ public class CoreSpellingProblem extends CategorizedProblem {
 	/*
 	 * @see org.eclipse.jdt.core.compiler.IProblem#getArguments()
 	 */
-	public String[] getArguments() {
+	@Override
+    public String[] getArguments() {
 
 		String prefix= ""; //$NON-NLS-1$
 		String postfix= ""; //$NON-NLS-1$
@@ -107,77 +108,88 @@ public class CoreSpellingProblem extends CategorizedProblem {
 	/*
 	 * @see org.eclipse.jdt.core.compiler.IProblem#getID()
 	 */
-	public int getID() {
+	@Override
+    public int getID() {
 		return SPELLING_PROBLEM_ID;
 	}
 
 	/*
 	 * @see org.eclipse.jdt.core.compiler.IProblem#getMessage()
 	 */
-	public String getMessage() {
+	@Override
+    public String getMessage() {
 		return fMessage;
 	}
 
 	/*
 	 * @see org.eclipse.jdt.core.compiler.IProblem#getOriginatingFileName()
 	 */
-	public char[] getOriginatingFileName() {
+	@Override
+    public char[] getOriginatingFileName() {
 		return fOrigin.toCharArray();
 	}
 
 	/*
 	 * @see org.eclipse.jdt.core.compiler.IProblem#getSourceEnd()
 	 */
-	public int getSourceEnd() {
+	@Override
+    public int getSourceEnd() {
 		return fSourceEnd;
 	}
 
 	/*
 	 * @see org.eclipse.jdt.core.compiler.IProblem#getSourceLineNumber()
 	 */
-	public int getSourceLineNumber() {
+	@Override
+    public int getSourceLineNumber() {
 		return fLineNumber;
 	}
 
 	/*
 	 * @see org.eclipse.jdt.core.compiler.IProblem#getSourceStart()
 	 */
-	public int getSourceStart() {
+	@Override
+    public int getSourceStart() {
 		return fSourceStart;
 	}
 
 	/*
 	 * @see org.eclipse.jdt.core.compiler.IProblem#isError()
 	 */
-	public boolean isError() {
+	@Override
+    public boolean isError() {
 		return false;
 	}
 
 	/*
 	 * @see org.eclipse.jdt.core.compiler.IProblem#isWarning()
 	 */
-	public boolean isWarning() {
+	@Override
+    public boolean isWarning() {
 		return true;
 	}
 
 	/*
 	 * @see org.eclipse.jdt.core.compiler.IProblem#setSourceStart(int)
 	 */
-	public void setSourceStart(int sourceStart) {
+	@Override
+    public void setSourceStart(int sourceStart) {
 		fSourceStart= sourceStart;
 	}
 
 	/*
 	 * @see org.eclipse.jdt.core.compiler.IProblem#setSourceEnd(int)
 	 */
-	public void setSourceEnd(int sourceEnd) {
+	@Override
+    public void setSourceEnd(int sourceEnd) {
 		fSourceEnd= sourceEnd;
 	}
 
 	/*
 	 * @see org.eclipse.jdt.core.compiler.IProblem#setSourceLineNumber(int)
 	 */
-	public void setSourceLineNumber(int lineNumber) {
+	@Override
+    public void setSourceLineNumber(int lineNumber) {
 		fLineNumber= lineNumber;
 	}
 

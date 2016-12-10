@@ -15,6 +15,7 @@ Still under construction.
 
 ### Build with Maven
 
+Before all, you need to install Maven form (https://maven.apache.org/download.cgi) with instructions (https://maven.apache.org/install.html) and set encrypted info for user of (https://partners.v8.1c.ru) in settings.xml [follow here to get example](https://github.com/1C-Company/dt-example-plugins/tree/master/simple-plugin).
 
 1. Open console in plugin directory
 2. Execute command:

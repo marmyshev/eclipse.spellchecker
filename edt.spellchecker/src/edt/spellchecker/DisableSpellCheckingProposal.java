@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IDocument;
@@ -19,10 +19,10 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.texteditor.spelling.SpellingService;
 
-import eclipse.spellchecker.etc.IJavaCompletionProposal;
-import eclipse.spellchecker.etc.IProposalRelevance;
-import eclipse.spellchecker.etc.JavaPluginImages;
-import eclipse.spellchecker.messages.JavaUIMessages;
+import edt.spellchecker.etc.IJavaCompletionProposal;
+import edt.spellchecker.etc.IProposalRelevance;
+import edt.spellchecker.etc.JavaPluginImages;
+import edt.spellchecker.messages.JavaUIMessages;
 
 
 /**

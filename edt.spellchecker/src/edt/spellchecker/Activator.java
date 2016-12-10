@@ -1,6 +1,5 @@
-package eclipse.spellchecker;
+package edt.spellchecker;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
@@ -15,7 +14,7 @@ import org.osgi.framework.BundleContext;
 
 public class Activator extends AbstractUIPlugin {
 
-	public static final String ID_PLUGIN = "eclipse.spellchecker";
+    public static final String ID_PLUGIN = "edt.spellchecker";
 	private static Activator plugin; // The shared instance.
 
 	/**

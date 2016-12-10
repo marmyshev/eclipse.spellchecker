@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker.engine;
+package edt.spellchecker.engine;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -34,11 +34,11 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
-import eclipse.spellchecker.Activator;
-import eclipse.spellchecker.etc.BasicElementLabels;
-import eclipse.spellchecker.etc.PreferenceConstants;
-import eclipse.spellchecker.messages.JavaUIMessages;
-import eclipse.spellchecker.messages.Messages;
+import edt.spellchecker.Activator;
+import edt.spellchecker.etc.BasicElementLabels;
+import edt.spellchecker.etc.PreferenceConstants;
+import edt.spellchecker.messages.JavaUIMessages;
+import edt.spellchecker.messages.Messages;
 
 
 /**
@@ -57,7 +57,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 		private static int hashCode(byte[] array) {
 			int prime= 31;
 			if (array == null)
-				return 0;
+            {
+                return 0;
+            }
 			int result= 1;
 			for (int index= 0; index < array.length; index++) {
 				result= prime * result + array[index];
@@ -81,14 +83,22 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
-				return true;
+            {
+                return true;
+            }
 			if (obj == null)
-				return false;
+            {
+                return false;
+            }
 			if (!(obj instanceof ByteArrayWrapper))
-				return false;
+            {
+                return false;
+            }
 			ByteArrayWrapper other= (ByteArrayWrapper)obj;
 			if (!Arrays.equals(byteArray, other.byteArray))
-				return false;
+            {
+                return false;
+            }
 			return true;
 		}
 	}
@@ -193,8 +203,10 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 
 			final Object candidates= getCandidates(hash);
 			if (candidates == null)
-				continue;
-			else if (candidates instanceof byte[]) {
+            {
+                continue;
+            }
+            else if (candidates instanceof byte[]) {
 				String candidate;
 				try {
 					candidate= new String((byte[])candidates, UTF_8);
@@ -207,7 +219,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 					buffer.setLength(0);
 					buffer.append(candidate);
 					if (sentence)
-						buffer.setCharAt(0, Character.toUpperCase(buffer.charAt(0)));
+                    {
+                        buffer.setCharAt(0, Character.toUpperCase(buffer.charAt(0)));
+                    }
 					result.add(new RankedWordProposal(buffer.toString(), -distance));
 				}
 				continue;
@@ -233,7 +247,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 					buffer.append(candidate);
 
 					if (sentence)
-						buffer.setCharAt(0, Character.toUpperCase(buffer.charAt(0)));
+                    {
+                        buffer.setCharAt(0, Character.toUpperCase(buffer.charAt(0)));
+                    }
 
 					result.add(new RankedWordProposal(buffer.toString(), -distance));
 				}
@@ -264,8 +280,10 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 
 		final Object candidates= getCandidates(fHashProvider.getHash(word));
 		if (candidates == null)
-			return;
-		else if (candidates instanceof byte[]) {
+        {
+            return;
+        }
+        else if (candidates instanceof byte[]) {
 			String candidate;
 			try {
 				candidate= new String((byte[])candidates, UTF_8);
@@ -276,7 +294,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 			distance= fDistanceAlgorithm.getDistance(word, candidate);
 			buffer.append(candidate);
 			if (sentence)
-				buffer.setCharAt(0, Character.toUpperCase(buffer.charAt(0)));
+            {
+                buffer.setCharAt(0, Character.toUpperCase(buffer.charAt(0)));
+            }
 			result.add(new RankedWordProposal(buffer.toString(), -distance));
 			return;
 		}
@@ -298,13 +318,17 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 			if (distance <= minimum) {
 
 				if (distance < minimum)
-					matches.clear();
+                {
+                    matches.clear();
+                }
 
 				buffer.setLength(0);
 				buffer.append(candidate);
 
 				if (sentence)
-					buffer.setCharAt(0, Character.toUpperCase(buffer.charAt(0)));
+                {
+                    buffer.setCharAt(0, Character.toUpperCase(buffer.charAt(0)));
+                }
 
 				matches.add(new RankedWordProposal(buffer.toString(), -distance));
 				minimum= distance;
@@ -343,9 +367,10 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellDictionary#getProposals(java.lang.String,boolean)
-	 */
-	public Set<RankedWordProposal> getProposals(final String word, final boolean sentence) {
+     * @see edt.spellchecker.engine.ISpellDictionary#getProposals(java.lang.String,boolean)
+     */
+	@Override
+    public Set<RankedWordProposal> getProposals(final String word, final boolean sentence) {
 
 		try {
 
@@ -353,7 +378,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 				synchronized (this) {
 					fLoaded= load(getURL());
 					if (fLoaded)
-						compact();
+                    {
+                        compact();
+                    }
 				}
 			}
 
@@ -402,7 +429,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 			}
 
 			if (offset == 0)
-				break;
+            {
+                break;
+            }
 
 			characters[offset]= characters[offset - 1];
 			--offset;
@@ -426,7 +455,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 		final char[] deleted= new char[characters.length - 1];
 
 		for (int index= 0; index < deleted.length; index++)
-			deleted[index]= characters[index];
+        {
+            deleted[index]= characters[index];
+        }
 
 		next= characters[characters.length - 1];
 		offset= deleted.length;
@@ -435,7 +466,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 
 			neighborhood.add(fHashProvider.getHash(new String(characters)));
 			if (offset == 0)
-				break;
+            {
+                break;
+            }
 
 			previous= next;
 			next= deleted[offset - 1];
@@ -448,7 +481,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 		final Set<RankedWordProposal> matches= getCandidates(word, sentence, neighborhood);
 
 		if (matches.size() == 0 && candidates.size() == 0)
-			getCandidates(word, sentence, candidates);
+        {
+            getCandidates(word, sentence, candidates);
+        }
 
 		candidates.addAll(matches);
 
@@ -500,9 +535,10 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellDictionary#isCorrect(java.lang.String)
-	 */
-	public boolean isCorrect(String word) {
+     * @see edt.spellchecker.engine.ISpellDictionary#isCorrect(java.lang.String)
+     */
+	@Override
+    public boolean isCorrect(String word) {
 		word= stripNonLetters(word);
 		try {
 
@@ -510,7 +546,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 				synchronized (this) {
 					fLoaded= load(getURL());
 					if (fLoaded)
-						compact();
+                    {
+                        compact();
+                    }
 				}
 			}
 
@@ -520,8 +558,10 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 
 		final Object candidates= getCandidates(fHashProvider.getHash(word));
 		if (candidates == null)
-			return false;
-		else if (candidates instanceof byte[]) {
+        {
+            return false;
+        }
+        else if (candidates instanceof byte[]) {
 			String candidate;
 			try {
 				candidate= new String((byte[])candidates, UTF_8);
@@ -530,7 +570,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 				return false;
 			}
 			if (candidate.equals(word) || candidate.equals(word.toLowerCase()))
-				return true;
+            {
+                return true;
+            }
 			return false;
 		}
 		@SuppressWarnings("unchecked")
@@ -554,10 +596,11 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellDictionary#setStripNonLetters(boolean)
-	 * @since 3.3
-	 */
-	public void setStripNonLetters(boolean state) {
+     * @see edt.spellchecker.engine.ISpellDictionary#setStripNonLetters(boolean)
+     * @since 3.3
+     */
+	@Override
+    public void setStripNonLetters(boolean state) {
 		fIsStrippingNonLetters= state;
 	}
 
@@ -573,17 +616,25 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 	 */
 	protected String stripNonLetters(String word) {
 		if (!fIsStrippingNonLetters)
-			return word;
+        {
+            return word;
+        }
 
 		int i= 0;
 		int j= word.length() - 1;
 		while (i <= j && !Character.isLetter(word.charAt(i)))
-			i++;
+        {
+            i++;
+        }
 		if (i > j)
-			return ""; //$NON-NLS-1$
+         {
+            return ""; //$NON-NLS-1$
+        }
 
 		while (j > i && !Character.isLetter(word.charAt(j)))
-			j--;
+        {
+            j--;
+        }
 
 		return word.substring(i, j+1);
 	}
@@ -591,7 +642,8 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 	/*
 	 * @see org.eclipse.jdt.ui.text.spelling.engine.ISpellDictionary#isLoaded()
 	 */
-	public synchronized final boolean isLoaded() {
+	@Override
+    public synchronized final boolean isLoaded() {
 		return fLoaded || fHashBuckets.size() > 0;
 	}
 
@@ -605,7 +657,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 	 */
 	protected synchronized boolean load(final URL url) {
 		 if (!fMustLoad)
-			 return fLoaded;
+        {
+            return fLoaded;
+        }
 
 		if (url != null) {
 			InputStream stream= null;
@@ -641,7 +695,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 						}
 						doRead= word != null;
 						if (doRead)
-							hashWord(word);
+                        {
+                            hashWord(word);
+                        }
 					}
 					return true;
 				}
@@ -649,25 +705,34 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 				String urlString= url.toString();
 				String lowercaseUrlString= urlString.toLowerCase();
 				if (urlString.equals(lowercaseUrlString))
-					Activator.log(ex);
-				else
-					try {
+                {
+                    Activator.log(ex);
+                }
+                else
+                {
+                    try {
 						return load(new URL(lowercaseUrlString));
 					} catch (MalformedURLException e) {
 						Activator.log(e);
 					}
+                }
 			} catch (IOException exception) {
 				if (line > 0) {
 					String message= Messages.format(JavaUIMessages.AbstractSpellingDictionary_encodingError, new Object[] { new Integer(line), BasicElementLabels.getURLPart(url.toString()) });
 					IStatus status= new Status(IStatus.ERROR, Activator.ID_PLUGIN, IStatus.OK, message, exception);
 					Activator.log(status);
-				} else
-					Activator.log(exception);
+				}
+                else
+                {
+                    Activator.log(exception);
+                }
 			} finally {
 				fMustLoad= false;
 				try {
 					if (stream != null)
-						stream.close();
+                    {
+                        stream.close();
+                    }
 				} catch (IOException x) {
 				}
 			}
@@ -685,7 +750,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 		while (iter.hasNext()) {
 			Object element= iter.next();
 			if (element instanceof ArrayList)
-				((ArrayList<?>)element).trimToSize();
+            {
+                ((ArrayList<?>)element).trimToSize();
+            }
 		}
 	}
 
@@ -712,7 +779,8 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 	/*
 	 * @see org.eclipse.jdt.ui.text.spelling.engine.ISpellDictionary#unload()
 	 */
-	public synchronized void unload() {
+	@Override
+    public synchronized void unload() {
 		fLoaded= false;
 		fMustLoad= true;
 		fHashBuckets.clear();
@@ -721,14 +789,16 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 	/*
 	 * @see org.eclipse.jdt.ui.text.spelling.engine.ISpellDictionary#acceptsWords()
 	 */
-	public boolean acceptsWords() {
+	@Override
+    public boolean acceptsWords() {
 		return false;
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellDictionary#addWord(java.lang.String)
-	 */
-	public void addWord(final String word) {
+     * @see edt.spellchecker.engine.ISpellDictionary#addWord(java.lang.String)
+     */
+	@Override
+    public void addWord(final String word) {
 		// Do nothing
 	}
 
@@ -741,7 +811,9 @@ public abstract class AbstractSpellDictionary implements ISpellDictionary {
 	protected String getEncoding() {
 		String encoding= Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.SPELLING_USER_DICTIONARY_ENCODING);
 		if (encoding == null || encoding.length() == 0)
-			encoding= ResourcesPlugin.getEncoding();
+        {
+            encoding= ResourcesPlugin.getEncoding();
+        }
 		return encoding;
 	}
 

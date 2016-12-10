@@ -9,11 +9,11 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package eclipse.spellchecker.engine;
+package edt.spellchecker.engine;
 
 import java.util.Locale;
 
-import eclipse.spellchecker.etc.PreferenceConstants;
+import edt.spellchecker.etc.PreferenceConstants;
 
 /**
  * Interface for a spell check engine.

@@ -9,13 +9,13 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import java.util.Locale;
 
 import org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext;
 
-import eclipse.spellchecker.messages.JavaUIMessages;
+import edt.spellchecker.messages.JavaUIMessages;
 
 /**
  * Proposal to change the letter case of a word.

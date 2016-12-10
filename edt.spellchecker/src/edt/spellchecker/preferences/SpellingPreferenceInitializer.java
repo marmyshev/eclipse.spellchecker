@@ -1,9 +1,9 @@
-package eclipse.spellchecker.preferences;
+package edt.spellchecker.preferences;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import eclipse.spellchecker.etc.PreferenceConstants;
+import edt.spellchecker.etc.PreferenceConstants;
 
 public class SpellingPreferenceInitializer extends AbstractPreferenceInitializer {
 

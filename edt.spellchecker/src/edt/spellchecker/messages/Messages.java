@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker.messages;
+package edt.spellchecker.messages;
 
 import com.ibm.icu.text.MessageFormat;
 

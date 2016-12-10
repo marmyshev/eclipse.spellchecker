@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Spellchecker
 Bundle-SymbolicName: edt.spellchecker;singleton:=true
 Bundle-Version: 3.3.0.qualifier
-Bundle-Activator: eclipse.spellchecker.Activator
+Bundle-Activator: edt.spellchecker.Activator
 Bundle-Vendor: Brainwy Software Ltda
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jface.text,

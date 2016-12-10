@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker.engine;
+package edt.spellchecker.engine;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,7 +19,7 @@ import java.util.Set;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import eclipse.spellchecker.etc.PreferenceConstants;
+import edt.spellchecker.etc.PreferenceConstants;
 
 
 /**
@@ -43,7 +43,9 @@ public class DefaultSpellChecker implements ISpellChecker {
 		for (int index= 0; index < word.length(); index++) {
 
 			if (Character.isDigit(word.charAt(index)))
-				return true;
+            {
+                return true;
+            }
 		}
 		return false;
 	}
@@ -65,19 +67,25 @@ public class DefaultSpellChecker implements ISpellChecker {
 		boolean upper= Character.isUpperCase(word.charAt(0));
 
 		if (sentence && upper && (length > 1))
-			upper= Character.isUpperCase(word.charAt(1));
+        {
+            upper= Character.isUpperCase(word.charAt(1));
+        }
 
 		if (upper) {
 
 			for (int index= length - 1; index > 0; index--) {
 				if (Character.isLowerCase(word.charAt(index)))
-					return true;
+                {
+                    return true;
+                }
 			}
 		} else {
 
 			for (int index= length - 1; index > 0; index--) {
 				if (Character.isUpperCase(word.charAt(index)))
-					return true;
+                {
+                    return true;
+                }
 			}
 		}
 		return false;
@@ -96,7 +104,9 @@ public class DefaultSpellChecker implements ISpellChecker {
 		for (int index= word.length() - 1; index >= 0; index--) {
 
 			if (Character.isLowerCase(word.charAt(index)))
-				return false;
+            {
+                return false;
+            }
 		}
 		return true;
 	}
@@ -114,7 +124,9 @@ public class DefaultSpellChecker implements ISpellChecker {
 		for (int index= 0; index < URL_PREFIXES.length; index++) {
 
 			if (word.startsWith(URL_PREFIXES[index]))
-				return true;
+            {
+                return true;
+            }
 		}
 		return false;
 	}
@@ -159,7 +171,8 @@ public class DefaultSpellChecker implements ISpellChecker {
 	/*
 	 * @see org.eclipse.spelling.done.ISpellChecker#addDictionary(org.eclipse.spelling.done.ISpellDictionary)
 	 */
-	public final void addDictionary(final ISpellDictionary dictionary) {
+	@Override
+    public final void addDictionary(final ISpellDictionary dictionary) {
 		// synchronizing is necessary as this is a write access
 		fDictionaries.add(dictionary);
 	}
@@ -167,7 +180,8 @@ public class DefaultSpellChecker implements ISpellChecker {
 	/*
 	 * @see org.eclipse.jdt.ui.text.spelling.engine.ISpellChecker#acceptsWords()
 	 */
-	public boolean acceptsWords() {
+	@Override
+    public boolean acceptsWords() {
 		// synchronizing might not be needed here since acceptWords is
 		// a read-only access and only called in the same thread as
 		// the modifying methods add/checkWord (?)
@@ -181,15 +195,18 @@ public class DefaultSpellChecker implements ISpellChecker {
 
 			dictionary= iterator.next();
 			if (dictionary.acceptsWords())
-				return true;
+            {
+                return true;
+            }
 		}
 		return false;
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellChecker#addWord(java.lang.String)
-	 */
-	public void addWord(final String word) {
+     * @see edt.spellchecker.engine.ISpellChecker#addWord(java.lang.String)
+     */
+	@Override
+    public void addWord(final String word) {
 		// synchronizing is necessary as this is a write access
 		Set<ISpellDictionary> copy;
 		synchronized (fDictionaries) {
@@ -200,7 +217,9 @@ public class DefaultSpellChecker implements ISpellChecker {
 		for (final Iterator<ISpellDictionary> iterator= copy.iterator(); iterator.hasNext();) {
 			ISpellDictionary dictionary= iterator.next();
 			if (dictionary.acceptsWords())
-				dictionary.addWord(addable);
+            {
+                dictionary.addWord(addable);
+            }
 		}
 
 	}
@@ -208,7 +227,8 @@ public class DefaultSpellChecker implements ISpellChecker {
 	/*
 	 * @see org.eclipse.jdt.ui.text.spelling.engine.ISpellChecker#checkWord(java.lang.String)
 	 */
-	public final void checkWord(final String word) {
+	@Override
+    public final void checkWord(final String word) {
 		// synchronizing is necessary as this is a write access
 		fIgnored.remove(word.toLowerCase());
 	}
@@ -216,7 +236,8 @@ public class DefaultSpellChecker implements ISpellChecker {
 	/*
 	 * @see org.eclipse.spelling.done.ISpellChecker#execute(org.eclipse.spelling.ISpellCheckTokenizer)
 	 */
-	public void execute(final ISpellEventListener listener, final ISpellCheckIterator iterator) {
+	@Override
+    public void execute(final ISpellEventListener listener, final ISpellCheckIterator iterator) {
 
 		final boolean ignoreDigits= fPreferences.getBoolean(PreferenceConstants.SPELLING_IGNORE_DIGITS);
 		final boolean ignoreMixed= fPreferences.getBoolean(PreferenceConstants.SPELLING_IGNORE_MIXED);
@@ -231,7 +252,9 @@ public class DefaultSpellChecker implements ISpellChecker {
 
 		Iterator<ISpellDictionary> iter= fDictionaries.iterator();
 		while (iter.hasNext())
-			iter.next().setStripNonLetters(ignoreNonLetters);
+        {
+            iter.next().setStripNonLetters(ignoreNonLetters);
+        }
 
 		String word= null;
 		boolean starts= false;
@@ -273,7 +296,8 @@ public class DefaultSpellChecker implements ISpellChecker {
 	/*
 	 * @see org.eclipse.spelling.done.ISpellChecker#getProposals(java.lang.String,boolean)
 	 */
-	public Set<RankedWordProposal> getProposals(final String word, final boolean sentence) {
+	@Override
+    public Set<RankedWordProposal> getProposals(final String word, final boolean sentence) {
 
 		// synchronizing might not be needed here since getProposals is
 		// a read-only access and only called in the same thread as
@@ -295,17 +319,19 @@ public class DefaultSpellChecker implements ISpellChecker {
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellChecker#ignoreWord(java.lang.String)
-	 */
-	public final void ignoreWord(final String word) {
+     * @see edt.spellchecker.engine.ISpellChecker#ignoreWord(java.lang.String)
+     */
+	@Override
+    public final void ignoreWord(final String word) {
 		// synchronizing is necessary as this is a write access
 		fIgnored.add(word.toLowerCase());
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellChecker#isCorrect(java.lang.String)
-	 */
-	public final boolean isCorrect(final String word) {
+     * @see edt.spellchecker.engine.ISpellChecker#isCorrect(java.lang.String)
+     */
+	@Override
+    public final boolean isCorrect(final String word) {
 		// synchronizing is necessary as this is called from execute
 		Set<ISpellDictionary> copy;
 		synchronized (fDictionaries) {
@@ -313,14 +339,18 @@ public class DefaultSpellChecker implements ISpellChecker {
 		}
 
 		if (fIgnored.contains(word.toLowerCase()))
-			return true;
+        {
+            return true;
+        }
 
 		ISpellDictionary dictionary= null;
 		for (final Iterator<ISpellDictionary> iterator= copy.iterator(); iterator.hasNext();) {
 
 			dictionary= iterator.next();
 			if (dictionary.isCorrect(word))
-				return true;
+            {
+                return true;
+            }
 		}
 		return false;
 	}
@@ -328,16 +358,18 @@ public class DefaultSpellChecker implements ISpellChecker {
 	/*
 	 * @see org.eclipse.spelling.done.ISpellChecker#removeDictionary(org.eclipse.spelling.done.ISpellDictionary)
 	 */
-	public final void removeDictionary(final ISpellDictionary dictionary) {
+	@Override
+    public final void removeDictionary(final ISpellDictionary dictionary) {
 		// synchronizing is necessary as this is a write access
 		fDictionaries.remove(dictionary);
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellChecker#getLocale()
-	 * @since 3.3
-	 */
-	public Locale getLocale() {
+     * @see edt.spellchecker.engine.ISpellChecker#getLocale()
+     * @since 3.3
+     */
+	@Override
+    public Locale getLocale() {
 		return fLocale;
 	}
 }

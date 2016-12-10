@@ -9,23 +9,23 @@
  *     IBM Corporation - initial API and implementation
  *     Ferenc Hechler, ferenc_hechler@users.sourceforge.net - 83258 [jar exporter] Deploy java application as executable jar
  *******************************************************************************/
-package eclipse.spellchecker.etc;
+package edt.spellchecker.etc;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.osgi.framework.Bundle;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.osgi.framework.Bundle;
 
-import eclipse.spellchecker.Activator;
+import edt.spellchecker.Activator;
 
 
 /**
@@ -35,7 +35,7 @@ public class JavaPluginImages {
 
 	public static final IPath ICONS_PATH= new Path("$nl$/icons/full"); //$NON-NLS-1$
 
-	private static final String NAME_PREFIX= "eclipse.spellchecker."; //$NON-NLS-1$
+    private static final String NAME_PREFIX = "edt.spellchecker."; //$NON-NLS-1$
 	private static final int    NAME_PREFIX_LENGTH= NAME_PREFIX.length();
 //
 //	// The plug-in registry
@@ -559,7 +559,9 @@ public class JavaPluginImages {
 	private static void setImageDescriptors(IAction action, String type, String relPath) {
 		ImageDescriptor id= create("d" + type, relPath, false); //$NON-NLS-1$
 		if (id != null)
-			action.setDisabledImageDescriptor(id);
+        {
+            action.setDisabledImageDescriptor(id);
+        }
 
 		/*
 		 * id= create("c" + type, relPath, false); //$NON-NLS-1$

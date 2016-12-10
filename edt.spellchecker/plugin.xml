@@ -8,8 +8,8 @@
 
     <!-- <extension point="org.eclipse.jdt.ui.quickFixProcessors">
         <quickFixProcessor
-            class="eclipse.spellchecker.WordQuickFixProcessor"
-            id="eclipse.spellchecker.WordQuickFixProcessor" name="%spellingQuickFixProcessor">
+            class="edt.spellchecker.WordQuickFixProcessor"
+            id="edt.spellchecker.WordQuickFixProcessor" name="%spellingQuickFixProcessor">
             <handledMarkerTypes>
                 <markerType id="spellchecker.marker"/>
             </handledMarkerTypes>
@@ -18,15 +18,15 @@
 
     <extension point="org.eclipse.ui.workbench.texteditor.spellingEngine">
         <engine
-            class="eclipse.spellchecker.DefaultSpellingEngine"
+            class="edt.spellchecker.DefaultSpellingEngine"
             default="true"
-            id="eclipse.spellchecker.DefaultSpellingEngine"
-            label="SpellChecker spelling engine" preferencesClass="eclipse.spellchecker.preferences.SpellingPreferenceBlock"/>
+            id="edt.spellchecker.DefaultSpellingEngine"
+            label="1C:EDT SpellChecker spelling engine" preferencesClass="edt.spellchecker.preferences.SpellingPreferenceBlock"/>
     </extension>
     <extension
           point="org.eclipse.core.runtime.preferences">
        <initializer
-             class="eclipse.spellchecker.preferences.SpellingPreferenceInitializer">
+             class="edt.spellchecker.preferences.SpellingPreferenceInitializer">
        </initializer>
     </extension>
 </plugin>

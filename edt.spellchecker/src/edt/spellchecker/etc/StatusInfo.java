@@ -8,12 +8,12 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker.etc;
+package edt.spellchecker.etc;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IStatus;
 
-import eclipse.spellchecker.Activator;
+import edt.spellchecker.Activator;
 
 /**
  * A settable IStatus.

@@ -1,4 +1,4 @@
-package eclipse.spellchecker.etc;
+package edt.spellchecker.etc;
 
 import org.eclipse.core.runtime.IStatus;
 

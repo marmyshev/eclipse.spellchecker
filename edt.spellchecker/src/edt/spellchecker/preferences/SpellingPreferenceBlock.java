@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package eclipse.spellchecker.preferences;
+package edt.spellchecker.preferences;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.swt.widgets.Composite;
@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.texteditor.spelling.IPreferenceStatusMonitor;
 import org.eclipse.ui.texteditor.spelling.ISpellingPreferenceBlock;
 
-import eclipse.spellchecker.etc.IStatusChangeListener;
+import edt.spellchecker.etc.IStatusChangeListener;
 
 /**
  * Spelling preference block

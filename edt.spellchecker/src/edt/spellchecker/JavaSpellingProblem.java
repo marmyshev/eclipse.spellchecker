@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,14 +23,14 @@ import org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext;
 import org.eclipse.jface.text.source.TextInvocationContext;
 import org.eclipse.ui.texteditor.spelling.SpellingProblem;
 
-import eclipse.spellchecker.engine.ISpellCheckEngine;
-import eclipse.spellchecker.engine.ISpellChecker;
-import eclipse.spellchecker.engine.ISpellEvent;
-import eclipse.spellchecker.engine.RankedWordProposal;
-import eclipse.spellchecker.etc.IJavaCompletionProposal;
-import eclipse.spellchecker.etc.PreferenceConstants;
-import eclipse.spellchecker.messages.JavaUIMessages;
-import eclipse.spellchecker.messages.Messages;
+import edt.spellchecker.engine.ISpellCheckEngine;
+import edt.spellchecker.engine.ISpellChecker;
+import edt.spellchecker.engine.ISpellEvent;
+import edt.spellchecker.engine.RankedWordProposal;
+import edt.spellchecker.etc.IJavaCompletionProposal;
+import edt.spellchecker.etc.PreferenceConstants;
+import edt.spellchecker.messages.JavaUIMessages;
+import edt.spellchecker.messages.Messages;
 
 /**
  * A {@link SpellingProblem} that adapts a {@link ISpellEvent}.

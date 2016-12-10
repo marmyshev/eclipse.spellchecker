@@ -1,4 +1,4 @@
-package eclipse.spellchecker.messages;
+package edt.spellchecker.messages;
 
 public class NLSElement {
 

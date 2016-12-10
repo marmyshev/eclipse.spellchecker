@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package eclipse.spellchecker;
+package edt.spellchecker;
 
 import java.util.LinkedList;
 import java.util.Locale;
@@ -19,9 +19,9 @@ import org.eclipse.jface.text.TextUtilities;
 
 import com.ibm.icu.text.BreakIterator;
 
-import eclipse.spellchecker.engine.DefaultSpellChecker;
-import eclipse.spellchecker.engine.ISpellCheckIterator;
-import eclipse.spellchecker.messages.NLSElement;
+import edt.spellchecker.engine.DefaultSpellChecker;
+import edt.spellchecker.engine.ISpellCheckIterator;
+import edt.spellchecker.messages.NLSElement;
 
 
 /**
@@ -102,7 +102,9 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 
 			content= document.get(region.getOffset(), region.getLength());
 			if (content.startsWith(NLSElement.TAG_PREFIX))
-				content= ""; //$NON-NLS-1$
+             {
+                content= ""; //$NON-NLS-1$
+            }
 
 		} catch (Exception exception) {
 			content= ""; //$NON-NLS-1$
@@ -125,31 +127,35 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 	}
 
 	/*
-	 * @see eclipse.spellchecker.engine.ISpellCheckIterator#setIgnoreSingleLetters(boolean)
-	 * @since 3.3
-	 */
-	public void setIgnoreSingleLetters(boolean state) {
+     * @see edt.spellchecker.engine.ISpellCheckIterator#setIgnoreSingleLetters(boolean)
+     * @since 3.3
+     */
+	@Override
+    public void setIgnoreSingleLetters(boolean state) {
 		fIsIgnoringSingleLetters= state;
 	}
 
 	/*
 	 * @see org.eclipse.spelling.done.ISpellCheckIterator#getBegin()
 	 */
-	public final int getBegin() {
+	@Override
+    public final int getBegin() {
 		return fPrevious + fOffset;
 	}
 
 	/*
 	 * @see org.eclipse.spelling.done.ISpellCheckIterator#getEnd()
 	 */
-	public final int getEnd() {
+	@Override
+    public final int getEnd() {
 		return fNext + fOffset - 1;
 	}
 
 	/*
 	 * @see java.util.Iterator#hasNext()
 	 */
-	public final boolean hasNext() {
+	@Override
+    public final boolean hasNext() {
 		return fSuccessor != BreakIterator.DONE;
 	}
 
@@ -171,10 +177,14 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 
 			character= fContent.charAt(index);
 			if (Character.isLetter(character))
-				letter= true;
+            {
+                letter= true;
+            }
 
 			if (!Character.isLetterOrDigit(character))
-				return false;
+            {
+                return false;
+            }
 		}
 		return letter;
 	}
@@ -204,7 +214,9 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 			for (int index= 0; index < tags.length; index++) {
 
 				if (token.equals(tags[index]))
-					return true;
+                {
+                    return true;
+                }
 			}
 		}
 		return false;
@@ -220,13 +232,19 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 	 */
 	protected final boolean isSingleLetter(final int begin) {
 		if (!Character.isLetter(fContent.charAt(begin)))
-			return false;
+        {
+            return false;
+        }
 
 		if (begin > 0 && !Character.isWhitespace(fContent.charAt(begin - 1)))
-			return false;
+        {
+            return false;
+        }
 
 		if (begin < fContent.length() - 1 && !Character.isWhitespace(fContent.charAt(begin + 1)))
-			return false;
+        {
+            return false;
+        }
 
 		return true;
 	}
@@ -243,7 +261,9 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 		for (int index= 0; index < DefaultSpellChecker.URL_PREFIXES.length; index++) {
 
 			if (fContent.startsWith(DefaultSpellChecker.URL_PREFIXES[index], begin))
-				return true;
+            {
+                return true;
+            }
 		}
 		return false;
 	}
@@ -261,7 +281,9 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 		for (int index= begin; index < end; index++) {
 
 			if (!Character.isWhitespace(fContent.charAt(index)))
-				return false;
+            {
+                return false;
+            }
 		}
 		return true;
 	}
@@ -269,11 +291,14 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 	/*
 	 * @see java.util.Iterator#next()
 	 */
-	public String next() {
+	@Override
+    public String next() {
 
 		String token= nextToken();
 		while (token == null && fSuccessor != BreakIterator.DONE)
-			token= nextToken();
+        {
+            token= nextToken();
+        }
 
 		fLastToken= token;
 
@@ -324,13 +349,18 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 				if (Character.isLetter(fContent.charAt(fPrevious + 1))) {
 					update= true;
 					token= fContent.substring(fPrevious, fNext);
-				} else
-					fPredecessor= fNext;
+				}
+                else
+                {
+                    fPredecessor= fNext;
+                }
 
 			} else if (fSuccessor != BreakIterator.DONE && fContent.charAt(fPrevious) == IHtmlTagConstants.HTML_TAG_PREFIX && (Character.isLetter(fContent.charAt(fNext)) || fContent.charAt(fNext) == '/')) {
 
 				if (fContent.startsWith(IHtmlTagConstants.HTML_CLOSE_PREFIX, fPrevious))
-					nextBreak();
+                {
+                    nextBreak();
+                }
 
 				nextBreak();
 
@@ -349,23 +379,35 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 					if (isToken(fContent.substring(fPrevious, fNext), IHtmlTagConstants.HTML_ENTITY_CODES)) {
 						skipTokens(fPrevious, IHtmlTagConstants.HTML_ENTITY_END);
 						update= true;
-					} else
-						token= fContent.substring(fPrevious, fNext);
-				} else
-					token= fContent.substring(fPrevious, fNext);
+					}
+                    else
+                    {
+                        token= fContent.substring(fPrevious, fNext);
+                    }
+				}
+                else
+                {
+                    token= fContent.substring(fPrevious, fNext);
+                }
 
 				update= true;
 			} else if (!isWhitespace(fPrevious, fNext) && isAlphaNumeric(fPrevious, fNext)) {
 
 				if (isUrlToken(fPrevious))
-					skipTokens(fPrevious, WHITE_SPACE_TOKEN);
-				else if (isToken(IJavaDocTagConstants.JAVADOC_PARAM_TAGS))
-					fLastToken= null;
-				else if (isToken(IJavaDocTagConstants.JAVADOC_REFERENCE_TAGS)) {
+                {
+                    skipTokens(fPrevious, WHITE_SPACE_TOKEN);
+                }
+                else if (isToken(IJavaDocTagConstants.JAVADOC_PARAM_TAGS))
+                {
+                    fLastToken= null;
+                }
+                else if (isToken(IJavaDocTagConstants.JAVADOC_REFERENCE_TAGS)) {
 					fLastToken= null;
 					skipTokens(fPrevious, fDelimiter.charAt(0));
 				} else if (fNext - fPrevious > 1 || isSingleLetter(fPrevious) && !fIsIgnoringSingleLetters)
-					token= fContent.substring(fPrevious, fNext);
+                {
+                    token= fContent.substring(fPrevious, fNext);
+                }
 
 				update= true;
 			}
@@ -376,7 +418,9 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 			if (fPrevious >= nextSentence()) {
 
 				while (fSentenceBreaks.size() > 0 && fPrevious >= nextSentence())
-					fSentenceBreaks.removeFirst();
+                {
+                    fSentenceBreaks.removeFirst();
+                }
 
 				fStartsSentence= (fLastToken == null) || (token != null);
 			}
@@ -387,7 +431,8 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 	/*
 	 * @see java.util.Iterator#remove()
 	 */
-	public final void remove() {
+	@Override
+    public final void remove() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -403,7 +448,9 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 		while (end < fContent.length()) {
 			char ch= fContent.charAt(end);
 			if (ch == stop || isStoppingOnWhiteSpace && Character.isWhitespace(ch))
-				break;
+            {
+                break;
+            }
 			end++;
 		}
 
@@ -413,14 +460,18 @@ public class SpellCheckIterator implements ISpellCheckIterator {
 			fPredecessor= fNext;
 
 			fSuccessor= fWordIterator.following(fNext);
-		} else
-			fSuccessor= BreakIterator.DONE;
+		}
+        else
+        {
+            fSuccessor= BreakIterator.DONE;
+        }
 	}
 
 	/*
 	 * @see org.eclipse.spelling.done.ISpellCheckIterator#startsSentence()
 	 */
-	public final boolean startsSentence() {
+	@Override
+    public final boolean startsSentence() {
 		return fStartsSentence;
 	}
 }

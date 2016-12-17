@@ -1,4 +1,4 @@
-# edt.spellchecker
+# edt.spellchecker [![Build Status](https://travis-ci.org/marmyshev/edt.spellchecker.svg?branch=master)](https://travis-ci.org/marmyshev/edt.spellchecker)
 1C:EDT Spelling service plugin
 
 ## Eclipse extension plugin for [1C:Enterprise Development Tools](http://1c-dn.com/1c_enterprise/1c_enterprise_developmet_tools_graphite/)
@@ -6,6 +6,8 @@
 Still under construction.
 
 ## Installation
+
+Add Eclipse Update Site to your 1C:EDT installation: [https://marmyshev.github.io/updates/edt/edt.spellchecker](https://marmyshev.github.io/updates/edt/edt.spellchecker)
 
 ### Necessary components
 

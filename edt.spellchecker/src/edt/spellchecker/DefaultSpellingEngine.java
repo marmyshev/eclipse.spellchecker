@@ -18,10 +18,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.core.runtime.content.IContentTypeManager;
-
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
-
 import org.eclipse.ui.texteditor.spelling.ISpellingEngine;
 import org.eclipse.ui.texteditor.spelling.ISpellingProblemCollector;
 import org.eclipse.ui.texteditor.spelling.SpellingContext;
@@ -41,6 +39,9 @@ public class DefaultSpellingEngine implements ISpellingEngine {
 	/** Text content type */
 	private static final IContentType TEXT_CONTENT_TYPE= Platform.getContentTypeManager().getContentType(IContentTypeManager.CT_TEXT);
 
+    private static final IContentType BSL_CONTENT_TYPE =
+        Platform.getContentTypeManager().getContentType("com._1c.g5.v8.dt.bsl.contenttype");
+
 	/** Available spelling engines by content type */
 	private Map<IContentType, SpellingEngine> fEngines= new HashMap<IContentType, SpellingEngine>();
 
@@ -48,19 +49,30 @@ public class DefaultSpellingEngine implements ISpellingEngine {
 	 * Initialize concrete engines.
 	 */
 	public DefaultSpellingEngine() {
-		if (TEXT_CONTENT_TYPE != null)
-			fEngines.put(TEXT_CONTENT_TYPE, new TextSpellingEngine());
+        if (BSL_CONTENT_TYPE != null)
+        {
+            this.fEngines.put(BSL_CONTENT_TYPE, new BslSpellingEngine());
+        }
+        if (TEXT_CONTENT_TYPE != null)
+        {
+            fEngines.put(TEXT_CONTENT_TYPE, new TextSpellingEngine());
+        }
 	}
 
 	/*
 	 * @see org.eclipse.ui.texteditor.spelling.ISpellingEngine#check(org.eclipse.jface.text.IDocument, org.eclipse.jface.text.IRegion[], org.eclipse.ui.texteditor.spelling.SpellingContext, org.eclipse.ui.texteditor.spelling.ISpellingProblemCollector, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void check(IDocument document, IRegion[] regions, SpellingContext context, ISpellingProblemCollector collector, IProgressMonitor monitor) {
+	@Override
+    public void check(IDocument document, IRegion[] regions, SpellingContext context, ISpellingProblemCollector collector, IProgressMonitor monitor) {
 		ISpellingEngine engine= getEngine(context.getContentType());
 		if (engine == null)
-			engine= getEngine(TEXT_CONTENT_TYPE);
+        {
+            engine= getEngine(TEXT_CONTENT_TYPE);
+        }
 		if (engine != null)
-			engine.check(document, regions, context, collector, monitor);
+        {
+            engine.check(document, regions, context, collector, monitor);
+        }
 	}
 
 	/**
@@ -73,10 +85,14 @@ public class DefaultSpellingEngine implements ISpellingEngine {
 	 */
 	private ISpellingEngine getEngine(IContentType contentType) {
 		if (contentType == null)
-			return null;
+        {
+            return null;
+        }
 
 		if (fEngines.containsKey(contentType))
-			return fEngines.get(contentType);
+        {
+            return fEngines.get(contentType);
+        }
 
 		return getEngine(contentType.getBaseType());
 	}

@@ -46,7 +46,8 @@ public class PreferenceConstants {
 	 *             and {@link org.eclipse.ui.texteditor.spelling.SpellingService#PREFERENCE_SPELLING_ENGINE}
 	 * @since 3.0
 	 */
-	public final static String SPELLING_CHECK_SPELLING= "spelling_check_spelling"; //$NON-NLS-1$
+    @Deprecated
+    public final static String SPELLING_CHECK_SPELLING= "spelling_check_spelling"; //$NON-NLS-1$
 
 	/**
 	 * A named preference that controls whether words containing digits should
@@ -137,15 +138,15 @@ public class PreferenceConstants {
 	public final static String SPELLING_IGNORE_NON_LETTERS= "spelling_ignore_non_letters"; //$NON-NLS-1$
 
 	/**
-	 * A named preference that controls whether Java strings
-	 * should be ignored during spell checking.
-	 * <p>
-	 * Value is of type <code>Boolean</code>.
-	 * </p>
-	 *
-	 * @since 3.4
-	 */
-	public static final String SPELLING_IGNORE_JAVA_STRINGS= "spelling_ignore_java_strings"; //$NON-NLS-1$;
+     * A named preference that controls whether Bsl strings
+     * should be ignored during spell checking.
+     * <p>
+     * Value is of type <code>Boolean</code>.
+     * </p>
+     *
+     * @since 3.4
+     */
+    public static final String SPELLING_IGNORE_BSL_STRINGS = "spelling_ignore_bsl_strings"; //$NON-NLS-1$;
 
 	/**
 	 * A named preference that controls the locale used for spell checking.
@@ -234,7 +235,9 @@ public class PreferenceConstants {
 			Locale locale= SpellCheckEngine.getDefaultLocale();
 			locale= SpellCheckEngine.findClosestLocale(locale);
 			if (locale != null)
-				store.setValue(PreferenceConstants.SPELLING_LOCALE, locale.toString());
+            {
+                store.setValue(PreferenceConstants.SPELLING_LOCALE, locale.toString());
+            }
 		}
 		store.setDefault(PreferenceConstants.SPELLING_IGNORE_DIGITS, true);
 		store.setDefault(PreferenceConstants.SPELLING_IGNORE_MIXED, true);
@@ -244,7 +247,7 @@ public class PreferenceConstants {
 		store.setDefault(PreferenceConstants.SPELLING_IGNORE_SINGLE_LETTERS, true);
 		store.setDefault(PreferenceConstants.SPELLING_IGNORE_AMPERSAND_IN_PROPERTIES, true);
 		store.setDefault(PreferenceConstants.SPELLING_IGNORE_NON_LETTERS, true);
-		store.setDefault(PreferenceConstants.SPELLING_IGNORE_JAVA_STRINGS, true);
+        store.setDefault(PreferenceConstants.SPELLING_IGNORE_BSL_STRINGS, false);
 		store.setDefault(PreferenceConstants.SPELLING_USER_DICTIONARY, ""); //$NON-NLS-1$
 
 		// Note: For backwards compatibility we must use the property and not the workspace default

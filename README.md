@@ -20,14 +20,8 @@ Add Eclipse Update Site to your 1C:EDT installation: [https://marmyshev.github.i
 Before all, you need to install Maven form (https://maven.apache.org/download.cgi) with instructions (https://maven.apache.org/install.html) and set encrypted info for user of (https://partners.v8.1c.ru) in settings.xml [follow here to get example](https://github.com/1C-Company/dt-example-plugins/tree/master/simple-plugin).
 
 1. Open console in plugin directory
-2. Execute command:
-```
-mvn clean verify -f build/pom.xml
-```
-3. Compiled p2 repository is in plugin subfolder:
-```
-/..PathToPluginDirectory../repository/target/repository/
-```
+2. Execute command: ```mvn clean verify -f build/pom.xml```
+3. Compiled p2 repository is in plugin subfolder: ```/..PathToPluginDirectory../repository/target/repository/```
 
 ## Usage
 
